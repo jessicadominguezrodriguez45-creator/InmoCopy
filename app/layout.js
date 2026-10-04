@@ -1,8 +1,8 @@
 export const metadata = {
   title: 'InmoCopy.ai',
   description: 'Plataforma de generación de copy inmobiliario',
-verification: { 
-  google : "3NUcMA8b8mi7_vCOawMajHtSdSX9hY4AsfpjzJttLE4" }, 
+other: { 
+'google-site-verification' : "3NUcMA8b8mi7_vCOawMajHtSdSX9hY4AsfpjzJttLE4" }, 
 },
 
 export default function RootLayout({ children }) {
