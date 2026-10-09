@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-// URL y clave fija
 const SUPABASE_URL = 'https://accjbkibebvqmupihtv.supabase.co';
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -20,12 +19,14 @@ export default function SignUpPage() {
     setLoading(true);
     setMessage('');
 
+    // Se deshabilita el envío de email de confirmación desde la llamada del cliente
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: 'https://inmo-copy-three.vercel.app',
-      },
+        shouldCreateUser: true,
+        data: {}
+      }
     });
 
     setLoading(false);
@@ -33,7 +34,12 @@ export default function SignUpPage() {
     if (error) {
       setMessage(`Error: ${error.message}`);
     } else {
-      setMessage('¡Registro completado con éxito!');
+      // Si el usuario se creó correctamente
+      if (data?.user) {
+        setMessage('¡Cuenta creada correctamente! Ya puedes iniciar sesión.');
+      } else {
+        setMessage('¡Registro completado!');
+      }
     }
   };
 
@@ -80,7 +86,7 @@ export default function SignUpPage() {
       </form>
 
       {message && (
-        <p style={{ marginTop: '20px', padding: '10px', backgroundColor: '#f0f0f0', borderRadius: '4px' }}>
+        <p style={{ marginTop: '20px', padding: '10px', backgroundColor: '#e6f4ea', color: '#137333', borderRadius: '4px' }}>
           {message}
         </p>
       )}
