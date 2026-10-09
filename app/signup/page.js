@@ -3,10 +3,11 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-);
+// URL exacta de tu proyecto Supabase y clave Legacy ANON
+const SUPABASE_URL = 'https://accjbkibebvqmupihtv.supabase.co';
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 export default function SignUpPage() {
   const [email, setEmail] = useState('');
