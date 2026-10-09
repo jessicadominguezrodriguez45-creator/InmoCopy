@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-// URL exacta de tu proyecto Supabase y clave Legacy ANON
+// URL y clave fija
 const SUPABASE_URL = 'https://accjbkibebvqmupihtv.supabase.co';
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -23,6 +23,9 @@ export default function SignUpPage() {
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        emailRedirectTo: 'https://inmo-copy-three.vercel.app',
+      },
     });
 
     setLoading(false);
@@ -30,7 +33,7 @@ export default function SignUpPage() {
     if (error) {
       setMessage(`Error: ${error.message}`);
     } else {
-      setMessage('¡Registro completado con éxito! Revisa tu correo o inicia sesión.');
+      setMessage('¡Registro completado con éxito!');
     }
   };
 
